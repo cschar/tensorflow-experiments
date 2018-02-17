@@ -25,3 +25,19 @@ python xml_to_csv.py
 #convert the csv files into .record files so tensorflow object detection  (transfer learning)
 #api can use it
 ```
+
+
+## make sure tensorflow/models is installed 
+https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/installation.md
+
+# install models/research from tensorflow 
+```
+git clone https://github.com/tensorflow/models
+cd models/research 
+pip install -e .
+#or 
+python3 setup.py install
+
+cd slim
+pip install -e . 
+```

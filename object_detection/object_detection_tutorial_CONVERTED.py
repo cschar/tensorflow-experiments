@@ -9,6 +9,7 @@
 # In[2]:
 
 
+
 import numpy as np
 import os
 import six.moves.urllib as urllib
@@ -17,10 +18,15 @@ import tarfile
 import tensorflow as tf
 import zipfile
 
+print("Video setup1")
 from collections import defaultdict
+print("Video setup2")
 from io import StringIO
-from matplotlib import pyplot as plt
+print("Video setup3")
+# from matplotlib import pyplot as plt
+print("Video setup4")
 from PIL import Image
+print("Video setup")
 from object_detection.utils import ops as utils_ops
 
 if tf.__version__ < '1.4.0':
