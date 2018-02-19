@@ -1,2 +1,6 @@
 __pycache__
 images
+*.meta
+*.index
+*.data-*
+*events.out*

@@ -1,3 +1,9 @@
+### note
+install notes for tensorflow-gpu windows 10
+https://github.com/tensorflow/tensorflow/issues/6698#issuecomment-366494831
+
+### using conda (python --> python3)
+
 Notes from sentdex object recognition tutorial:
 https://pythonprogramming.net/custom-objects-tracking-tensorflow-object-detection-api-tutorial/
 
@@ -36,8 +42,62 @@ git clone https://github.com/tensorflow/models
 cd models/research 
 pip install -e .
 #or 
-python3 setup.py install
+python setup.py install
 
 cd slim
 pip install -e . 
 ```
+
+
+## Train Model:
+### Generate model.ckpt-<step checkpoint> index and meta files:
+```
+cd object_detection
+python train.py --logtostderr --train_dir=training/ --pipeline_config_path=training/ssd_mobilenet_v1_pets.config
+```
+
+## CPU vs GPU while training
+```
+with cpu
+INFO:tensorflow:global step 13: loss = 8.2746 (2.709 sec/step)
+INFO:tensorflow:global step 14: loss = 6.5976 (2.698 sec/step)
+INFO:tensorflow:global step 15: loss = 7.1465 (2.721 sec/step)
+INFO:tensorflow:global step 16: loss = 7.0370 (2.741 sec/step)
+INFO:tensorflow:global step 17: loss = 6.6211 (2.880 sec/step)
+INFO:tensorflow:global step 18: loss = 6.1563 (2.789 sec/step)
+INFO:tensorflow:global step 19: loss = 7.5296 (2.736 sec/step)
+
+with gpu (source activate tensorflow-gpu)
+INFO:tensorflow:global step 10: loss = 7.9591 (0.549 sec/step)
+INFO:tensorflow:global step 11: loss = 6.9812 (0.553 sec/step)
+INFO:tensorflow:global step 12: loss = 7.4003 (0.580 sec/step)
+INFO:tensorflow:global step 13: loss = 7.6535 (0.548 sec/step)
+INFO:tensorflow:global step 14: loss = 7.5797 (0.546 sec/step)
+INFO:tensorflow:global step 15: loss = 7.8302 (0.537 sec/step)
+INFO:tensorflow:global step 16: loss = 7.3381 (0.557 sec/step)
+INFO:tensorflow:global step 17: loss = 5.9450 (0.619 sec/step)
+INFO:tensorflow:global step 18: loss = 5.7952 (0.557 sec/step)
+INFO:tensorflow:global step 19: loss = 5.8427 (0.537 sec/step)
+
+```
+
+
+Then  when loss < 1.
+
+## exporting inference graph from training .ckpt files
+
+
+```
+# --trained_checkpoint_prefix corresponds to whatever number you have reached in the training folder
+
+python export_inference_graph.py \
+    --input_type image_tensor \
+    --pipeline_config_path training/ssd_mobilenet_v1_pets.config \
+    --trained_checkpoint_prefix training/model.ckpt-16333  \
+    --output_directory mac_n_cheese_graph
+```
+
+
+####TOCheckout
+https://github.com/OluwoleOyetoke/Computer_Vision_Using_TensorFlowLite
+
