@@ -39,7 +39,7 @@ except UserWarning as e:
 
 
 
-MODEL_NAME = 'ssd_mobilenet_v1_coco_2017_11_17'
+MODEL_NAME = 'ssd_mobilenet_v1_coco_11_06_2017'
 
 # Path to frozen detection graph. This is the actual model that is used for the object detection.
 PATH_TO_CKPT = MODEL_NAME + '/frozen_inference_graph.pb'
