@@ -183,6 +183,9 @@ PATH_TO_TEST_IMAGES_DIR = 'test_images'
 TEST_IMAGE_PATHS = [ os.path.join(PATH_TO_TEST_IMAGES_DIR,
                                   'image{}.jpg'.format(i)) for i in range(13, 16) ]
 
+#https://www.youtube.com/watch?v=VcnEYI7wNh0
+# mac n cheese real time screen capture
+
 with detection_graph.as_default():
   with tf.Session(graph=detection_graph) as sess:
     i = 13
@@ -195,7 +198,6 @@ with detection_graph.as_default():
         # image_np = load_image_into_numpy_array(image)
         print(image_np.shape)
         # image_np = cv2.cvtColor(image_np, cv2.COLOR_BGR2RGB)
-        print(image_np.shape)
         i += 1
         if i % 16 == 0:
             i = 13
@@ -234,7 +236,9 @@ with detection_graph.as_default():
             use_normalized_coordinates=True,
             line_thickness=8)
 
+        image_np = cv2.cvtColor(image_np, cv2.COLOR_BGR2RGB)
         cv2.imshow('window', image_np)
+        # cv2.imshow('object detection', cv2.resize(image_np, (800,600)))
         if cv2.waitKey(25) & 0xFF == ord('q'):
             cv2.destroyAllWindows()
             break
