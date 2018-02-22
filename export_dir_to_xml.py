@@ -47,7 +47,8 @@ FLAGS, unparsed = parser.parse_known_args()
 if FLAGS.image_dir:
   IMG_DIR=os.path.expanduser(FLAGS.image_dir)
 else:
-  IMG_DIR=os.path.expanduser("~/flower_photos/daisy/")
+  raise Exception("specify --image_dir")
+  # IMG_DIR=os.path.expanduser("~/flower_photos/daisy/train")
 
 
 for idx, img_path in enumerate(os.listdir(IMG_DIR)):
