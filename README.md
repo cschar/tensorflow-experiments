@@ -77,6 +77,7 @@ python C:\Users\codywin\mdev\tensorflow-experiments\generate_tfrecord.py  --csv_
 
 # setup training/ssd_mobilenet_v1_pets_daisy.config (copy from template)
 
+
 cat > data/daisy-object-detection.pbtxt
 item{
     id: 1
@@ -86,14 +87,43 @@ item{
 cp ~/flower_photos/daisy/data/test.record ./data/daisy_test.record
 cp ~/flower_photos/daisy/data/train.record ./data/daisy_train.record
 
-
- 
-
-
-
+# make sure unzipped ssd_mobilenet_v1_coco_11_06_2017 folder is in object_detection
+## this is referenced in .config file 
+## if its ../object_detection, wont work!
 
 
+python train.py --logtostderr --train_dir=training_daisy/ --pipeline_config_path=training_daisy/ssd_mobilenet_v1_pets_daisy.config
 
+
+INFO:tensorflow:global step 1: loss = 13.5551 (7.474 sec/step)
+INFO:tensorflow:global step 2: loss = 12.0193 (0.576 sec/step)
+INFO:tensorflow:global step 3: loss = 10.0618 (0.611 sec/step)
+INFO:tensorflow:global step 4: loss = 8.7930 (0.624 sec/step)
+INFO:tensorflow:global step 7: loss = 6.7923 (0.622 sec/step)
+INFO:tensorflow:global step 8: loss = 5.8830 (0.607 sec/step)
+INFO:tensorflow:global step 9: loss = 5.1327 (0.613 sec/step)
+INFO:tensorflow:global step 10: loss = 4.4913 (0.649 sec/step)
+INFO:tensorflow:global step 18: loss = 1.9779 (0.638 sec/step)
+INFO:tensorflow:global step 19: loss = 1.6576 (0.511 sec/step)
+INFO:tensorflow:global step 20: loss = 1.6131 (0.632 sec/step)
+
+
+INFO:tensorflow:Saving checkpoint to path training_daisy/model.ckpt
+### at this point we get a model.ckpt-1121.meta file there
+
+python export_inference_graph.py \
+    --input_type image_tensor \
+    --pipeline_config_path training_daisy/ssd_mobilenet_v1_pets_daisy.config \
+    --trained_checkpoint_prefix training_daisy/model.ckpt-1121  \
+    --output_directory graph_daisy
+
+
+jupyter notebook
+
+# open up object_detection_tutorial_daisy to use the inference graphh
+# located in graph_daisy
+
+### DONE
 
 
 ```
