@@ -4,3 +4,7 @@ images
 *.index
 *.data-*
 *events.out*
+checkpoint
+*.pbtxt
+*.record
+*.ipynb_checkpoints*

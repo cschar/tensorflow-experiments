@@ -24,6 +24,43 @@ https://github.com/datitran/raccoon_dataset
 https://towardsdatascience.com/how-to-train-your-own-object-detector-with-tensorflows-object-detector-api-bec72ecfe1d9
 
 
+
+# MAL trial ===
+
+```
+
+ffmpeg -i myfile.avi -r 1000 -f image2 image-%07d.png
+
+python export_dir_to_xml.py --image_dir=~/mdev/mal/images/test/ 
+
+python ~/mdev/tensorflow-experiments/generate_tfrecord.py --csv_input=data/test_labels.csv --output_path=data/test.record --images_input=images/test
+
+python ~/mdev/tensorflow-experiments/generate_tfrecord.py --csv_input=data/train_labels.csv --output_path=data/train.record --images_input=images/train
+
+### move .record data into object_detection/data
+## setup .config files and directories
+
+cp data/train.record ~/mdev/tensorflow-experiments/object_detection/data/mal_train.record
+cp data/test.record ~/mdev/tensorflow-experiments/object_detection/data/mal_test.record
+
+
+
+python train.py --logtostderr --train_dir=training_mal/ --pipeline_config_path=training_mal/ssd_mobilenet_v1_pets_mal.config
+
+### optional visualize loss graphs
+tensorboard --logdir='training_mal'
+
+
+python export_inference_graph.py \
+    --input_type image_tensor \
+    --pipeline_config_path training_mal/ssd_mobilenet_v1_pets_mal.config \
+    --trained_checkpoint_prefix training_mal/model.ckpt-7359  \
+    --output_directory graph_mal2
+
+
+
+```
+
 # DAISY trial ===
 ```
 
