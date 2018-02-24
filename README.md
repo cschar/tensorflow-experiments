@@ -236,3 +236,6 @@ python export_inference_graph.py \
 ####TOCheckout
 https://github.com/OluwoleOyetoke/Computer_Vision_Using_TensorFlowLite
 
+
+## Great intro article
+https://adeshpande3.github.io/adeshpande3.github.io/A-Beginner%27s-Guide-To-Understanding-Convolutional-Neural-Networks/
