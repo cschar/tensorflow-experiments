@@ -231,7 +231,8 @@ python export_inference_graph.py \
     --trained_checkpoint_prefix training/model.ckpt-16333  \
     --output_directory mac_n_cheese_graph
 ```
-
+## exporting conda env
+ conda env export -n <name of env> -f myenv.yml
 
 ####TOCheckout
 https://github.com/OluwoleOyetoke/Computer_Vision_Using_TensorFlowLite
